@@ -1,0 +1,36 @@
+std::cout<<"Found a call expression"<<std::endl;
+
+VectorTable* callExpVect = new VectorTable("callETable",vectParent);
+storeTemps = 1;
+if ((*stmt_listPtrVect)[i]->ExprVect != NULL){
+	std::cout<<"call expr vect is not null"<<std::endl;
+	callExpVect->stmt_listPtrVect = (*stmt_listPtrVect)[i]->ExprVect;
+	std::cout<<"Calling Stack iterator again"<<std::endl;
+	coVect = (ExprVect)->StackIteratorforIR(coVect);
+	std::cout<<"Done with Stack iterator again"<<std::endl;
+}
+
+IRcodeVector.push_back(";PUSH");
+IRcodeVector.push_back(";PUSHREGS");
+
+
+
+
+std::string tempStr = "!T"+std::to_string((long long)tempReg);	
+tempReg++;
+//Need to get the return expr value
+//std::string storeStr1 = ";STOREI "+/*(*stmt_listPtrVect)[i]->"Return expr value*/+" "+tempStr;
+//std::string storeStr2 = ";STOREI "+tempStr+" "+/*(*stmt_listPtrVect)[i]->assignLHS "Formula answer that uses no. of registers"*/;
+
+//IRcodeVector.push_back(storeStr1);
+//IRcodeVector.push_back(storeStr2);
+IRcodeVector.push_back(";UNLINK");
+IRcodeVector.push_back(";RET");
+std::cout<<"Done with the return"<<std::endl;
+CodeObject* rootCo = VectorTable::createIRvector((*stmt_listPtrVect)[i]->returnExpr);
+std::cout<<"Created rootCo for return"<<std::endl;
+if(!rootCo->instruction.empty()){
+	coVect.push_back(rootCo);
+}
+std::cout<<"Pushed rootCo into coVect"<<std::endl;
+}	

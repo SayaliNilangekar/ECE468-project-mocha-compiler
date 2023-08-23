@@ -1,0 +1,24 @@
+PROGRAM test
+BEGIN
+
+	INT i, j, num;
+	
+
+	FUNCTION VOID main()
+	BEGIN
+	
+		num := 7;			
+        READ(num);
+		j := 1;
+		j := num;	
+		i := 100;
+
+		WHILE(i != 0)
+			num := 0.5*(j + num/j);
+			num := j;
+			i := i-1;
+		ENDWHILE
+		        
+		WRITE(num);
+	END
+END
