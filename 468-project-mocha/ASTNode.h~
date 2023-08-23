@@ -1,0 +1,21 @@
+#ifndef ASTNODE_H
+#define ASTNODE_H
+
+#include <iostream>
+#include <string>
+#include <stack>
+#include <vector>
+#include <map>
+
+class ASTNode{
+public:
+	std::string token;
+	std::string tokenType;
+	Symbol* ASTentry;
+	ASTNode* rightChild;
+	ASTNode* leftChild;
+	ASTNode(std::string tok, std::string tokType): token(tok), tokenType(tokType), rightChild(NULL), leftChild(NULL), ASTentry(NULL){}
+	void addRightChild(ASTNode* rchild); //Adding right child
+	void addLeftChild(ASTNode* lchild); //Adding left child
+	
+}

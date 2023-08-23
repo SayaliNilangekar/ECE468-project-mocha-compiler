@@ -1,0 +1,208 @@
+//
+// Created by Lenovo on 9/29/2018.
+//
+
+#ifndef SYMBOLTABLE_H
+#define SYMBOLTABLE_H
+
+#include <iostream>
+#include <string>
+#include <stack>
+#include <vector>
+#include <map>
+#include <list>
+
+
+using std::vector;
+
+class Symbol{
+public:
+    int var_type;
+    std::string var_name;
+    std::string str_var_value;
+
+    Symbol(int t, std::string n, std::string v): var_type(t), var_name(n), str_var_value(v){}
+    Symbol(int t, std::string n): var_type(t), var_name(n){}
+};
+
+
+class SymbolTable{
+public:
+    std::string scope;
+    SymbolTable* parent;
+    std::vector<SymbolTable *> children; //vector of all the children SymbolTables
+
+    std::map<std::string, Symbol*> table;
+    std::vector<Symbol*> ordered_table;//only needed for step3
+    
+    SymbolTable(std::string s, SymbolTable* p):scope(s), parent(p){}
+
+    void PrintSymbolTables();
+    void addDecl(Symbol* entry); //adds a declaration(of type Symbol) to vector
+    
+    
+};
+
+
+
+
+class ASTNode{
+public:
+	std::string token;
+	Symbol* symb;
+	ASTNode* rightChild;
+	ASTNode* leftChild;
+	int tokType;
+	std::string IOType; //for IO Nodes
+	std::string assignLHS; //for assign nodes
+	ASTNode* assignRHS; //for assign nodes
+
+
+	//Constructors
+	ASTNode(){}
+	ASTNode(std::string tok, int tT): token(tok), tokType(tT), symb(NULL), rightChild(NULL), leftChild(NULL), IOType("NoIO"), assignLHS(NULL), assignRHS(NULL){}
+	
+};
+
+
+class VarRef : public ASTNode{
+public:
+	//Symbol* symb;
+
+	//Constructor
+	VarRef(Symbol* sy){
+		ASTNode::symb = sy;
+		ASTNode::token = sy->var_name;
+		
+		//Int id
+		if(ASTNode::symb->var_type == 275)
+		{
+			ASTNode::tokType = 2;
+		}
+		
+		//Float id		
+		else if(ASTNode::symb->var_type == 278)
+		{
+			ASTNode::tokType = 3;
+		}
+
+		//String id		
+		else if(ASTNode::symb->var_type == 277)
+		{
+			ASTNode::tokType = 4;
+		}				
+	}
+};
+
+class Arithmetic : public ASTNode{
+public:
+	
+	//Constructor
+	Arithmetic(std::string tok){
+		ASTNode::token = tok;
+		ASTNode::tokType = 1;
+	}
+};
+
+class LitNode : public ASTNode{
+public:
+	
+
+	//Constructor
+	LitNode(std::string lit, int tType){
+		ASTNode::token = lit;
+		ASTNode::tokType = tType;	
+	}
+};
+
+class IONode : public ASTNode {
+public:
+	
+	//Constructor
+	IONode(Symbol* sy, std::string IOT){
+		if(sy != NULL){		
+			ASTNode::symb = sy;
+			ASTNode::token = sy->var_name;
+			ASTNode::IOType = IOT;
+		}
+		else{
+			ASTNode::token = "newline";
+			ASTNode::IOType = IOT;
+			}
+		
+	}
+
+
+};
+
+class AssignNode : public ASTNode{
+public:
+	//Constructor
+	AssignNode(std::string LHS, ASTNode* RHS){
+		ASTNode::assignLHS = LHS;
+		ASTNode::assignRHS = RHS;		
+	
+	}
+
+};
+
+
+typedef class IRNode{
+public:
+	std::string instruction;	// this is the instruction
+	std::string oper1;			// this is the first operator
+	std::string oper2;			// this is the second operator (may be null for read or write or store)
+	std::string result; 		// this is the temp where result will be stored
+}IRNode;
+
+typedef class CodeObj{
+
+public:
+	vector<IRNode> InstrSeq;	// the list of 3AC instructions
+	std::string result;	// this is the temp where result is stored
+	int type;		/* this is the type of the result of the instruction
+							1->int var
+							2->float var
+							3->int literal
+							4->float literal
+					*/	
+}CodeObj;
+
+// this will store all the IRcode for the whole program
+typedef class IRCode{
+public:
+	std::vector<CodeObj*>complete_IR_code;
+}IRCode;
+
+class VectorTable{
+public:
+	VectorTable* vectParent;
+	std::vector <ASTNode*> stmtVect;
+	std::vector<VectorTable *> vectChildren;
+	void printStack();
+	//Constructor
+	VectorTable(VectorTable* p): vectParent(p) {}
+};
+
+/*
+ *	Function accepts pointer to root node of an AST (so type AST*), and returns 3AC instruction for the expression.
+ *	The 3AC instrutions should be stored in correct order in the InstrSeq of the CodeObj returned.
+ */
+//CodeObj return_RHS_3AC(ASTNode *);	
+
+/*
+ *	Helper function to keep generating new temporaries
+ *	Generates new temporaries by having global counter keep incrementing
+ */
+
+CodeObj* return_RHS_3AC(ASTNode* astNode);
+CodeObj* return_LHS_3AC(std::string, CodeObj*);
+void print_3AC_code(CodeObj*);
+void print_IR_code(IRCode);
+void convert_ir_to_assembly(IRCode ir_code);
+void convert_3AC_code(CodeObj* currentCodeExpr);
+
+std::string generateTemp();
+
+
+#endif //ECE468STEP3_SYMBOLTABLE_H

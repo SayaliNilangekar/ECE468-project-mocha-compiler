@@ -1,0 +1,97 @@
+INSIDE ADD DECL FUNC-----------> i
+INSIDE ORDERED TABLE!!!!!!!!!!!
+ORDERED TABLE ELEMENT    0 ------ i
+Id_LIST ELEMENT -----------------------  i
+INSIDE ADD DECL FUNC-----------> j
+INSIDE ORDERED TABLE!!!!!!!!!!!
+ORDERED TABLE ELEMENT    0 ------ i
+ORDERED TABLE ELEMENT    1 ------ j
+Id_LIST ELEMENT -----------------------  j
+INSIDE ADD DECL FUNC-----------> num
+INSIDE ORDERED TABLE!!!!!!!!!!!
+ORDERED TABLE ELEMENT    0 ------ i
+ORDERED TABLE ELEMENT    1 ------ j
+ORDERED TABLE ELEMENT    2 ------ num
+Id_LIST ELEMENT -----------------------  num
+;IR CODE
+;PUSH
+;PUSHREGS
+;JSR FUNC_main
+;HALT
+;LABEL FUNC_main
+;LINK 1
+;READI num
+;STOREI 1 !T0
+;STOREI !T0 j
+;STOREI num !T1
+;STOREI !T1 j
+;STOREI 100 !T2
+;STOREI !T2 i
+;LABEL WHILE_START_1
+;STOREI 0 !T3
+;EQI i !T3 WHILE_END_2
+;STOREF 0.5 !T5
+;DIVI num j !T6
+;ADDI j !T6 !T7
+;MULF !T5 !T7 !T8
+;STOREF !T8 num
+;STOREI j !T9
+;STOREI !T9 num
+;STOREI 1 !T10
+;SUBI i !T10 !T11
+;STOREI !T11 i
+;JUMP WHILE_START_1
+;LABEL WHILE_END_2
+;WRITEI num
+;RET
+symtabstack3
+Printing var declGLOBAL
+size: 3
+HERE
+HERE2
+var i
+HERE
+HERE2
+var j
+HERE
+HERE2
+var num
+Printing var declmain
+size: 0
+Printing var declBLOCK 1
+size: 0
+push
+jsr FUNC_main
+sys halt
+label FUNC_main
+link 1
+sys readi num
+move 1 r0 
+move r0 j
+move num r1 
+move r1 j
+move 100 r2 
+move r2 i
+label WHILE_START_1
+move 0 r3 
+cmpi i r3 
+jeq WHILE_END_2
+move 0.5 r5 
+move num r6 
+divi j r6 
+move j r7 
+addi r6 r7 
+move r5 r8 
+mulr r7 r8 
+move r8 num
+move j r9 
+move r9 num
+move 1 r10 
+move i r11 
+subi r10 r11 
+move r11 i
+jmp WHILE_START_1
+label WHILE_END_2
+sys writei num
+unlnk
+ret

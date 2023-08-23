@@ -1,0 +1,134 @@
+var a
+var b
+var k
+var g
+var p
+var u
+;IR CODE
+;PUSH
+;PUSHREGS
+;JSR FUNC_main
+;HALT
+;LABEL FUNC_main
+;LINK 1
+;STOREI 1 !T0
+;STOREI !T0 b
+;STOREI 1 !T1
+;STOREI !T1 a
+;LABEL WHILE_START_1
+;STOREI 120 !T2
+;GTI a !T2 WHILE_END_2
+;STOREI 1 !T4
+;NEI b !T4 ELSE_3
+;STOREI 1 !T6
+;MULI !T6 a !T7
+;STOREI !T7 g
+;WRITEI g
+;JUMP END_IF_ELSE_4
+;LABEL ELSE_3
+;STOREI 2 !T8
+;NEI b !T8 ELSE_5
+;STOREI 2 !T10
+;MULI !T10 a !T11
+;STOREI !T11 p
+;WRITEI p
+;JUMP END_IF_ELSE_6
+;LABEL ELSE_5
+;STOREI 3 !T12
+;NEI b !T12 ELSE_7
+;STOREI 3 !T14
+;MULI !T14 a !T15
+;STOREI !T15 k
+;WRITEI k
+;JUMP END_IF_ELSE_8
+;LABEL ELSE_7
+;STOREI 4 !T16
+;NEI b !T16 ELSE_9
+;STOREI 4 !T18
+;MULI !T18 a !T19
+;STOREI !T19 u
+;WRITEI u
+;JUMP END_IF_ELSE_10
+;LABEL ELSE_9
+;LABEL END_IF_ELSE_10
+;LABEL END_IF_ELSE_8
+;LABEL END_IF_ELSE_6
+;LABEL END_IF_ELSE_4
+;STOREI 1 !T20
+;ADDI b !T20 !T21
+;STOREI !T21 b
+;STOREI 20 !T22
+;ADDI a !T22 !T23
+;STOREI !T23 a
+;JUMP WHILE_START_1
+;LABEL WHILE_END_2
+;RET
+push
+jsr FUNC_main
+sys halt
+label FUNC_main
+link 1
+move 1 r0 
+move r0 b
+move 1 r1 
+move r1 a
+label WHILE_START_1
+move 120 r2 
+cmpi a r2 
+jgt WHILE_END_2
+move 1 r4 
+cmpi b r4 
+jne ELSE_3
+move 1 r6 
+move r6 r7 
+muli a r7 
+move r7 g
+sys writei g
+jmp END_IF_ELSE_4
+label ELSE_3
+move 2 r8 
+cmpi b r8 
+jne ELSE_5
+move 2 r10 
+move r10 r11 
+muli a r11 
+move r11 p
+sys writei p
+jmp END_IF_ELSE_6
+label ELSE_5
+move 3 r12 
+cmpi b r12 
+jne ELSE_7
+move 3 r14 
+move r14 r15 
+muli a r15 
+move r15 k
+sys writei k
+jmp END_IF_ELSE_8
+label ELSE_7
+move 4 r16 
+cmpi b r16 
+jne ELSE_9
+move 4 r18 
+move r18 r19 
+muli a r19 
+move r19 u
+sys writei u
+jmp END_IF_ELSE_10
+label ELSE_9
+label END_IF_ELSE_10
+label END_IF_ELSE_8
+label END_IF_ELSE_6
+label END_IF_ELSE_4
+move 1 r20 
+move b r21 
+addi r20 r21 
+move r21 b
+move 20 r22 
+move a r23 
+addi r22 r23 
+move r23 a
+jmp WHILE_START_1
+label WHILE_END_2
+unlnk
+ret

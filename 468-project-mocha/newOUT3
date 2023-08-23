@@ -1,0 +1,137 @@
+var count
+var enough
+var newapprox
+var approx
+var num
+var tolerance
+var diff
+str eol "\n"
+str space " "
+;IR CODE
+;PUSH
+;PUSHREGS
+;JSR FUNC_main
+;HALT
+;LABEL FUNC_main
+;LINK 1
+;STOREF 0.0001 !T0
+;STOREF !T0 tolerance
+;READF num
+;STOREF num !T1
+;STOREF !T1 approx
+;STOREI 0 !T2
+;STOREI !T2 count
+;STOREF 0.0 !T3
+;STOREF !T3 diff
+;STOREI 0 !T4
+;STOREI !T4 enough
+;LABEL WHILE_START_1
+;STOREI 1 !T5
+;EQI enough !T5 WHILE_END_2
+;STOREI 1 !T7
+;ADDI count !T7 !T8
+;STOREI !T8 count
+;STOREF 0.5 !T9
+;DIVF num approx !T10
+;ADDF approx !T10 !T11
+;MULF !T9 !T11 !T12
+;STOREF !T12 newapprox
+;SUBF approx newapprox !T13
+;STOREF !T13 diff
+;STOREF 0.0 !T14
+;LEF diff !T14 ELSE_3
+;GEF diff tolerance ELSE_4
+;STOREI 1 !T17
+;STOREI !T17 enough
+;JUMP END_IF_ELSE_5
+;LABEL ELSE_4
+;LABEL END_IF_ELSE_5
+;JUMP END_IF_ELSE_6
+;LABEL ELSE_3
+;STOREF 0.0 !T18
+;SUBF !T18 tolerance !T19
+;LEF diff !T19 ELSE_7
+;STOREI 1 !T21
+;STOREI !T21 enough
+;JUMP END_IF_ELSE_8
+;LABEL ELSE_7
+;LABEL END_IF_ELSE_8
+;LABEL END_IF_ELSE_6
+;STOREF newapprox !T22
+;STOREF !T22 approx
+;JUMP WHILE_START_1
+;LABEL WHILE_END_2
+;WRITEF approx
+;WRITES space
+;WRITEI count
+;WRITES eol
+;RET
+push
+jsr FUNC_main
+sys halt
+label FUNC_main
+link 1
+move 0.0001 r0 
+move r0 tolerance
+sys readr num
+move num r1 
+move r1 approx
+move 0 r2 
+move r2 count
+move 0.0 r3 
+move r3 diff
+move 0 r4 
+move r4 enough
+label WHILE_START_1
+move 1 r5 
+cmpi enough r5 
+jeq WHILE_END_2
+move 1 r7 
+move count r8 
+addi r7 r8 
+move r8 count
+move 0.5 r9 
+move num r10 
+divr approx r10 
+move approx r11 
+addr r10 r11 
+move r9 r12 
+mulr r11 r12 
+move r12 newapprox
+move approx r13 
+subr newapprox r13 
+move r13 diff
+move 0.0 r14 
+cmpr diff r14 
+jle ELSE_3
+move tolerance r23 
+cmpr diff r23 
+jge ELSE_4
+move 1 r17 
+move r17 enough
+jmp END_IF_ELSE_5
+label ELSE_4
+label END_IF_ELSE_5
+jmp END_IF_ELSE_6
+label ELSE_3
+move 0.0 r18 
+move r18 r19 
+subr tolerance r19 
+cmpr diff r19 
+jle ELSE_7
+move 1 r21 
+move r21 enough
+jmp END_IF_ELSE_8
+label ELSE_7
+label END_IF_ELSE_8
+label END_IF_ELSE_6
+move newapprox r22 
+move r22 approx
+jmp WHILE_START_1
+label WHILE_END_2
+sys writer approx
+sys writes space
+sys writei count
+sys writes eol
+unlnk
+ret

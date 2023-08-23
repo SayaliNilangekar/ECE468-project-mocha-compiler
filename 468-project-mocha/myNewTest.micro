@@ -1,0 +1,5 @@
+PROGRAM test
+BEGIN
+	INT i := 0;
+	STRING str := "test";
+END
