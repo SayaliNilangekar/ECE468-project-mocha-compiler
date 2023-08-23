@@ -1,0 +1,879 @@
+str input "Please enter an integer number: "
+str eol "\n"
+;IR CODE
+;PUSH
+;PUSHREGS
+;JSR FUNC_main
+;HALT
+;LABEL FUNC_factorial
+;LINK 2
+;STOREI 1 !T0
+;NEI $2 !T0 ELSE_1
+;STOREI 1 !T2
+;STOREI !T2 $7
+;UNLINK
+;RET
+;JUMP END_IF_ELSE_2
+;LABEL ELSE_1
+;STOREI 1 !T4
+;SUBI $2 !T4 !T5
+;STOREI !T5 !T6
+;PUSH
+;PUSHREGS
+;PUSH !T5
+;JSR FUNC_factorial
+;POP
+;POPREGS
+;POP !T7
+;STOREI !T7 $-2
+;MULI $-2 $2 !T8
+;STOREI !T8 $-1
+;LABEL END_IF_ELSE_2
+;STOREI $-1 !T9
+;STOREI !T9 $7
+;UNLINK
+;RET
+;UNLINK
+;RET
+;LABEL FUNC_main
+;LINK 2
+;WRITES input
+;READI $-1
+;STOREI 1 !T10
+;NEI $-1 !T10 ELSE_3
+;STOREI 1 !T12
+;STOREI !T12 $-2
+;JUMP END_IF_ELSE_4
+;LABEL ELSE_3
+;STOREI 1 !T13
+;LEI $-1 !T13 ELSE_5
+;PUSH
+;PUSHREGS
+;PUSH $-1
+;JSR FUNC_factorial
+;POP
+;POPREGS
+;POP !T15
+;STOREI !T15 $-2
+;JUMP END_IF_ELSE_6
+;LABEL ELSE_5
+;STOREI 0 !T16
+;STOREI !T16 $-2
+;LABEL END_IF_ELSE_6
+;LABEL END_IF_ELSE_4
+;WRITEI $-2
+;WRITES eol
+;UNLINK
+;RET
+;UNLINK
+;RET
+Printing CFG entries ----------------------->>> 0     ;IR CODE
+LIVE-IN size:   6
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 1     ;PUSH
+LIVE-IN size:   6
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 2     ;PUSHREGS
+LIVE-IN size:   6
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 3     ;JSR FUNC_main
+LIVE-IN size:   6
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 4     ;HALT
+LIVE-IN size:   6
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 5     ;LABEL FUNC_factorial
+LIVE-IN size:   6
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 6     ;LINK 2
+LIVE-IN size:   6
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 7     ;STOREI 1 !T0
+LIVE-IN size:   6
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   7
+LIVE OUT element #1 --->  !T0
+LIVE OUT element #2 --->  $-1
+LIVE OUT element #3 --->  $2
+LIVE OUT element #4 --->  0
+LIVE OUT element #5 --->  1
+LIVE OUT element #6 --->  eol
+LIVE OUT element #7 --->  input
+Printing CFG entries ----------------------->>> 8     ;NEI $2 !T0 ELSE_1
+LIVE-IN size:   7
+LIVE IN element #1 --->  !T0
+LIVE IN element #2 --->  $-1
+LIVE IN element #3 --->  $2
+LIVE IN element #4 --->  0
+LIVE IN element #5 --->  1
+LIVE IN element #6 --->  eol
+LIVE IN element #7 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 9     ;STOREI 1 !T2
+LIVE-IN size:   5
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  !T2
+LIVE OUT element #2 --->  $-1
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 10     ;STOREI !T2 $7
+LIVE-IN size:   6
+LIVE IN element #1 --->  !T2
+LIVE IN element #2 --->  $-1
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 11     ;UNLINK
+LIVE-IN size:   5
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 12     ;RET
+LIVE-IN size:   5
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 13     ;JUMP END_IF_ELSE_2
+LIVE-IN size:   5
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 14     ;LABEL ELSE_1
+LIVE-IN size:   5
+LIVE IN element #1 --->  $2
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $2
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 15     ;STOREI 1 !T4
+LIVE-IN size:   5
+LIVE IN element #1 --->  $2
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  !T4
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 16     ;SUBI $2 !T4 !T5
+LIVE-IN size:   6
+LIVE IN element #1 --->  !T4
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  !T5
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 17     ;STOREI !T5 !T6
+LIVE-IN size:   6
+LIVE IN element #1 --->  !T5
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  !T5
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 18     ;PUSH
+LIVE-IN size:   6
+LIVE IN element #1 --->  !T5
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  !T5
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 19     ;PUSHREGS
+LIVE-IN size:   6
+LIVE IN element #1 --->  !T5
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  !T5
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 20     ;PUSH !T5
+LIVE-IN size:   6
+LIVE IN element #1 --->  !T5
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $2
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 21     ;JSR FUNC_factorial
+LIVE-IN size:   5
+LIVE IN element #1 --->  $2
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $2
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 22     ;POP
+LIVE-IN size:   5
+LIVE IN element #1 --->  $2
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $2
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 23     ;POPREGS
+LIVE-IN size:   5
+LIVE IN element #1 --->  $2
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $2
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 24     ;POP !T7
+LIVE-IN size:   5
+LIVE IN element #1 --->  $2
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  !T7
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 25     ;STOREI !T7 $-2
+LIVE-IN size:   6
+LIVE IN element #1 --->  !T7
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  $-2
+LIVE OUT element #2 --->  $2
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 26     ;MULI $-2 $2 !T8
+LIVE-IN size:   6
+LIVE IN element #1 --->  $-2
+LIVE IN element #2 --->  $2
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  !T8
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 27     ;STOREI !T8 $-1
+LIVE-IN size:   5
+LIVE IN element #1 --->  !T8
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 28     ;LABEL END_IF_ELSE_2
+LIVE-IN size:   5
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 29     ;STOREI $-1 !T9
+LIVE-IN size:   5
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  !T9
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 30     ;STOREI !T9 $7
+LIVE-IN size:   5
+LIVE IN element #1 --->  !T9
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   4
+LIVE OUT element #1 --->  0
+LIVE OUT element #2 --->  1
+LIVE OUT element #3 --->  eol
+LIVE OUT element #4 --->  input
+Printing CFG entries ----------------------->>> 31     ;UNLINK
+LIVE-IN size:   4
+LIVE IN element #1 --->  0
+LIVE IN element #2 --->  1
+LIVE IN element #3 --->  eol
+LIVE IN element #4 --->  input
+LIVE-OUT size:   4
+LIVE OUT element #1 --->  0
+LIVE OUT element #2 --->  1
+LIVE OUT element #3 --->  eol
+LIVE OUT element #4 --->  input
+Printing CFG entries ----------------------->>> 32     ;RET
+LIVE-IN size:   4
+LIVE IN element #1 --->  0
+LIVE IN element #2 --->  1
+LIVE IN element #3 --->  eol
+LIVE IN element #4 --->  input
+LIVE-OUT size:   4
+LIVE OUT element #1 --->  0
+LIVE OUT element #2 --->  1
+LIVE OUT element #3 --->  eol
+LIVE OUT element #4 --->  input
+Printing CFG entries ----------------------->>> 33     ;UNLINK
+LIVE-IN size:   4
+LIVE IN element #1 --->  0
+LIVE IN element #2 --->  1
+LIVE IN element #3 --->  eol
+LIVE IN element #4 --->  input
+LIVE-OUT size:   4
+LIVE OUT element #1 --->  0
+LIVE OUT element #2 --->  1
+LIVE OUT element #3 --->  eol
+LIVE OUT element #4 --->  input
+Printing CFG entries ----------------------->>> 34     ;RET
+LIVE-IN size:   4
+LIVE IN element #1 --->  0
+LIVE IN element #2 --->  1
+LIVE IN element #3 --->  eol
+LIVE IN element #4 --->  input
+LIVE-OUT size:   4
+LIVE OUT element #1 --->  0
+LIVE OUT element #2 --->  1
+LIVE OUT element #3 --->  eol
+LIVE OUT element #4 --->  input
+Printing CFG entries ----------------------->>> 35     ;LABEL FUNC_main
+LIVE-IN size:   4
+LIVE IN element #1 --->  0
+LIVE IN element #2 --->  1
+LIVE IN element #3 --->  eol
+LIVE IN element #4 --->  input
+LIVE-OUT size:   4
+LIVE OUT element #1 --->  0
+LIVE OUT element #2 --->  1
+LIVE OUT element #3 --->  eol
+LIVE OUT element #4 --->  input
+Printing CFG entries ----------------------->>> 36     ;LINK 2
+LIVE-IN size:   4
+LIVE IN element #1 --->  0
+LIVE IN element #2 --->  1
+LIVE IN element #3 --->  eol
+LIVE IN element #4 --->  input
+LIVE-OUT size:   4
+LIVE OUT element #1 --->  0
+LIVE OUT element #2 --->  1
+LIVE OUT element #3 --->  eol
+LIVE OUT element #4 --->  input
+Printing CFG entries ----------------------->>> 37     ;WRITES input
+LIVE-IN size:   4
+LIVE IN element #1 --->  0
+LIVE IN element #2 --->  1
+LIVE IN element #3 --->  eol
+LIVE IN element #4 --->  input
+LIVE-OUT size:   4
+LIVE OUT element #1 --->  0
+LIVE OUT element #2 --->  1
+LIVE OUT element #3 --->  eol
+LIVE OUT element #4 --->  input
+Printing CFG entries ----------------------->>> 38     ;READI $-1
+LIVE-IN size:   4
+LIVE IN element #1 --->  0
+LIVE IN element #2 --->  1
+LIVE IN element #3 --->  eol
+LIVE IN element #4 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 39     ;STOREI 1 !T10
+LIVE-IN size:   5
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   6
+LIVE OUT element #1 --->  !T10
+LIVE OUT element #2 --->  $-1
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  1
+LIVE OUT element #5 --->  eol
+LIVE OUT element #6 --->  input
+Printing CFG entries ----------------------->>> 40     ;NEI $-1 !T10 ELSE_3
+LIVE-IN size:   6
+LIVE IN element #1 --->  !T10
+LIVE IN element #2 --->  $-1
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  1
+LIVE IN element #5 --->  eol
+LIVE IN element #6 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 41     ;STOREI 1 !T12
+LIVE-IN size:   2
+LIVE IN element #1 --->  1
+LIVE IN element #2 --->  eol
+LIVE-OUT size:   2
+LIVE OUT element #1 --->  !T12
+LIVE OUT element #2 --->  eol
+Printing CFG entries ----------------------->>> 42     ;STOREI !T12 $-2
+LIVE-IN size:   2
+LIVE IN element #1 --->  !T12
+LIVE IN element #2 --->  eol
+LIVE-OUT size:   2
+LIVE OUT element #1 --->  $-2
+LIVE OUT element #2 --->  eol
+Printing CFG entries ----------------------->>> 43     ;JUMP END_IF_ELSE_4
+LIVE-IN size:   2
+LIVE IN element #1 --->  $-2
+LIVE IN element #2 --->  eol
+LIVE-OUT size:   2
+LIVE OUT element #1 --->  $-2
+LIVE OUT element #2 --->  eol
+Printing CFG entries ----------------------->>> 44     ;LABEL ELSE_3
+LIVE-IN size:   5
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  1
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 45     ;STOREI 1 !T13
+LIVE-IN size:   5
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  0
+LIVE IN element #3 --->  1
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   5
+LIVE OUT element #1 --->  !T13
+LIVE OUT element #2 --->  $-1
+LIVE OUT element #3 --->  0
+LIVE OUT element #4 --->  eol
+LIVE OUT element #5 --->  input
+Printing CFG entries ----------------------->>> 46     ;LEI $-1 !T13 ELSE_5
+LIVE-IN size:   5
+LIVE IN element #1 --->  !T13
+LIVE IN element #2 --->  $-1
+LIVE IN element #3 --->  0
+LIVE IN element #4 --->  eol
+LIVE IN element #5 --->  input
+LIVE-OUT size:   4
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  0
+LIVE OUT element #3 --->  eol
+LIVE OUT element #4 --->  input
+Printing CFG entries ----------------------->>> 47     ;PUSH
+LIVE-IN size:   3
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  eol
+LIVE IN element #3 --->  input
+LIVE-OUT size:   3
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  eol
+LIVE OUT element #3 --->  input
+Printing CFG entries ----------------------->>> 48     ;PUSHREGS
+LIVE-IN size:   3
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  eol
+LIVE IN element #3 --->  input
+LIVE-OUT size:   3
+LIVE OUT element #1 --->  $-1
+LIVE OUT element #2 --->  eol
+LIVE OUT element #3 --->  input
+Printing CFG entries ----------------------->>> 49     ;PUSH $-1
+LIVE-IN size:   3
+LIVE IN element #1 --->  $-1
+LIVE IN element #2 --->  eol
+LIVE IN element #3 --->  input
+LIVE-OUT size:   2
+LIVE OUT element #1 --->  eol
+LIVE OUT element #2 --->  input
+Printing CFG entries ----------------------->>> 50     ;JSR FUNC_factorial
+LIVE-IN size:   2
+LIVE IN element #1 --->  eol
+LIVE IN element #2 --->  input
+LIVE-OUT size:   1
+LIVE OUT element #1 --->  eol
+Printing CFG entries ----------------------->>> 51     ;POP
+LIVE-IN size:   1
+LIVE IN element #1 --->  eol
+LIVE-OUT size:   1
+LIVE OUT element #1 --->  eol
+Printing CFG entries ----------------------->>> 52     ;POPREGS
+LIVE-IN size:   1
+LIVE IN element #1 --->  eol
+LIVE-OUT size:   1
+LIVE OUT element #1 --->  eol
+Printing CFG entries ----------------------->>> 53     ;POP !T15
+LIVE-IN size:   1
+LIVE IN element #1 --->  eol
+LIVE-OUT size:   2
+LIVE OUT element #1 --->  !T15
+LIVE OUT element #2 --->  eol
+Printing CFG entries ----------------------->>> 54     ;STOREI !T15 $-2
+LIVE-IN size:   2
+LIVE IN element #1 --->  !T15
+LIVE IN element #2 --->  eol
+LIVE-OUT size:   2
+LIVE OUT element #1 --->  $-2
+LIVE OUT element #2 --->  eol
+Printing CFG entries ----------------------->>> 55     ;JUMP END_IF_ELSE_6
+LIVE-IN size:   2
+LIVE IN element #1 --->  $-2
+LIVE IN element #2 --->  eol
+LIVE-OUT size:   2
+LIVE OUT element #1 --->  $-2
+LIVE OUT element #2 --->  eol
+Printing CFG entries ----------------------->>> 56     ;LABEL ELSE_5
+LIVE-IN size:   2
+LIVE IN element #1 --->  0
+LIVE IN element #2 --->  eol
+LIVE-OUT size:   2
+LIVE OUT element #1 --->  0
+LIVE OUT element #2 --->  eol
+Printing CFG entries ----------------------->>> 57     ;STOREI 0 !T16
+LIVE-IN size:   2
+LIVE IN element #1 --->  0
+LIVE IN element #2 --->  eol
+LIVE-OUT size:   2
+LIVE OUT element #1 --->  !T16
+LIVE OUT element #2 --->  eol
+Printing CFG entries ----------------------->>> 58     ;STOREI !T16 $-2
+LIVE-IN size:   2
+LIVE IN element #1 --->  !T16
+LIVE IN element #2 --->  eol
+LIVE-OUT size:   2
+LIVE OUT element #1 --->  $-2
+LIVE OUT element #2 --->  eol
+Printing CFG entries ----------------------->>> 59     ;LABEL END_IF_ELSE_6
+LIVE-IN size:   2
+LIVE IN element #1 --->  $-2
+LIVE IN element #2 --->  eol
+LIVE-OUT size:   2
+LIVE OUT element #1 --->  $-2
+LIVE OUT element #2 --->  eol
+Printing CFG entries ----------------------->>> 60     ;LABEL END_IF_ELSE_4
+LIVE-IN size:   2
+LIVE IN element #1 --->  $-2
+LIVE IN element #2 --->  eol
+LIVE-OUT size:   2
+LIVE OUT element #1 --->  $-2
+LIVE OUT element #2 --->  eol
+Printing CFG entries ----------------------->>> 61     ;WRITEI $-2
+LIVE-IN size:   2
+LIVE IN element #1 --->  $-2
+LIVE IN element #2 --->  eol
+LIVE-OUT size:   1
+LIVE OUT element #1 --->  eol
+Printing CFG entries ----------------------->>> 62     ;WRITES eol
+LIVE-IN size:   1
+LIVE IN element #1 --->  eol
+Printing CFG entries ----------------------->>> 63     ;UNLINK
+Printing CFG entries ----------------------->>> 64     ;RET
+Printing CFG entries ----------------------->>> 65     ;UNLINK
+Printing CFG entries ----------------------->>> 66     ;RET
+push
+push r0
+push r1
+push r2
+push r3
+jsr FUNC_main
+sys halt
+label FUNC_factorial
+link 2
+move 1 r0 
+cmpi $2 r0 
+jne ELSE_1
+move 1 r2 
+move r2 $7
+unlnk
+ret
+jmp END_IF_ELSE_2
+label ELSE_1
+move 1 r4 
+move $2 r5 
+subi r4 r5 
+move r5 r6 
+push
+push r0
+push r1
+push r2
+push r3
+push r5 
+jsr FUNC_factorial
+pop
+pop r3
+pop r2
+pop r1
+pop r0
+pop r7 
+move r7 $-2
+move $-2 r8 
+muli $2 r8 
+move r8 $-1
+label END_IF_ELSE_2
+move $-1 r9 
+move r9 $7
+unlnk
+ret
+unlnk
+ret
+label FUNC_main
+link 2
+sys writes input
+sys readi $-1
+move 1 r10 
+cmpi $-1 r10 
+jne ELSE_3
+move 1 r12 
+move r12 $-2
+jmp END_IF_ELSE_4
+label ELSE_3
+move 1 r13 
+cmpi $-1 r13 
+jle ELSE_5
+push
+push r0
+push r1
+push r2
+push r3
+push $-1
+jsr FUNC_factorial
+pop
+pop r3
+pop r2
+pop r1
+pop r0
+pop r15 
+move r15 $-2
+jmp END_IF_ELSE_6
+label ELSE_5
+move 0 r16 
+move r16 $-2
+label END_IF_ELSE_6
+label END_IF_ELSE_4
+sys writei $-2
+sys writes eol
+unlnk
+ret
+unlnk
+ret

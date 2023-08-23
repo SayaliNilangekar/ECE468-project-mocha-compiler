@@ -1,0 +1,138 @@
+%{
+#include <stdio.h>
+%}
+
+NUM [0-9][^\"]
+ALPHA [a-zA-Z][^\"]
+SPL [^a-zA-Z0-9][^\"]
+
+STRING \"(\\.|[^"\\])*\"
+
+
+DIGIT [0-9]+
+FLOATLITERAL [0-9]+\.[0-9]*|\.[0-9]+
+COMMENT \-{2}[^\n]+\n
+KEYWORD ("PROGRAM"|"BEGIN"|"END"|"FUNCTION"|"READ"|"WRITE"|"IF"|"ELSE"|"ENDIF"|"WHILE"|"ENDWHILE"|"RETURN"|"INT"|"VOID"|"STRING"|"FLOAT"|"TRUE"|"FALSE")
+OPERATOR (":="|"+"|"-"|"*"|"/"|"="|"!="|"<"|">"|"("|")"|";"|","|"<="|">=")
+IDENTIFIER [a-zA-Z]{1}[a-zA-Z0-9]*
+
+_PROGRAM "PROGRAM"
+_BEGIN "BEGIN"
+_END "END"
+_FUNCTION "FUNCTION"
+_READ "READ"
+_WRITE "WRITE"
+_IF "IF"
+_ELSE "ELSE"
+_ENDIF "ENDIF"
+_WHILE "WHILE"
+_ENDWHILE "ENDWHILE"
+_RETURN "RETURN"
+_INT "INT"
+_VOID "VOID"
+_STRING "STRING"
+_FLOAT "FLOAT"
+_TRUE "TRUE"
+_FALSE "FALSE"
+
+
+COLONEQUAL ":="
+SEMICOLON ";"
+PLUS "+"
+MINUS "-"
+ASTERISK "*"
+FWDSLASH "/"
+EQUAL "="
+NOTEQUAL "!="
+LESSTHAN "<"
+GREATERTHAN ">"
+OPENPARAN "("
+CLOSEPARAN ")"
+COMMA ","
+LESSTHANEQUAL "<="
+GREATERTHANEQUAL ">="
+
+
+
+/*** Rules ***/
+
+%%
+
+
+{DIGIT}	{ printf("Token Type: INTLITERAL \nValue: %s\n",yytext);}
+
+{STRING} { printf("Token Type: STRINGLITERAL \nValue: %s\n",yytext);}
+
+{FLOATLITERAL}	{ printf("Token Type: FLOATLITERAL \nValue: %s\n",yytext);}
+
+[ \t\n\r]	;
+
+[\"{1}] ;
+
+{COMMENT} ;
+
+{KEYWORD} { printf("Token Type: KEYWORD \nValue: %s\n",yytext);}
+
+{OPERATOR} { printf("Token Type: OPERATOR \nValue: %s\n",yytext);}
+
+{IDENTIFIER} { printf("Token Type: IDENTIFIER \nValue: %s\n",yytext);}
+
+{_PROGRAM} { return _PROGRAM; }
+{_BEGIN} { return _BEGIN; }
+{_END} { return _END; }
+{_FUNCTION} { return _FUNCTION; }
+{_READ} { return _READ; }
+{_WRITE} { return _WRITE; }
+{_IF} { return _IF; }
+{_ELSE} { return _ELSE; }
+{_ENDIF} { return _ENDIF; }
+{_WHILE} { return _WHILE; }
+{_ENDWHILE} { return _ENDWHILE; }
+{_RETURN} { return _RETURN; }
+{_INT} { return _INT; }
+{_VOID} { return _VOID; }
+{_STRING} { return _STRING; }
+{_FLOAT} { return _FLOAT; }
+{_TRUE} { return _TRUE; }
+{_FALSE} { return _FALSE; }
+
+
+{COLONEQUAL} { return COLONEQUAL; }
+{SEMICOLON} { return SEMICOLON; }
+{PLUS} { return PLUS; }
+{MINUS} { return MINUS; }
+{ASTERISK} { return ASTERISK; }
+{FWDSLASH} { return FWDSLASH; }
+{EQUAL} { return EQUAL; }
+{NOTEQUAL} { return NOTEQUAL; }
+{LESSTHAN} { return LESSTHAN; }
+{GREATERTHAN} { return GREATERTHAN; }
+{OPENPARAN} { return OPENPARAN; }
+{CLOSEPARAN} { return CLOSEPARAN; }
+{COMMA} { return COMMA; }
+{LESSTHANEQUAL} { return LESSTHANEQUAL; }
+{GREATERTHANEQUAL} { return GREATERTHANEQUAL; }
+
+
+%%
+/*
+main(argc,argv)
+int argc;
+char** argv;
+{
+	//++argv, --argc;
+	if(argc > 0)
+		yyin = fopen(argv[1], "r");
+	else
+		yyin = stdin;
+	yylex();
+
+
+}*/
+
+int main(int argc, char *argv[]){
+	if(argc > 0)
+		yyin = fopen(argv[1], "r");
+	yylex();
+	return 0;
+}

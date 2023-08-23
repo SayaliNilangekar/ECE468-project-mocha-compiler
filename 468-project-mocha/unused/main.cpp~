@@ -1,0 +1,106 @@
+#include <iostream>
+#include "microParser.tab.h"
+#include <stdio.h>
+#include <string>
+#include <stack>
+#include <vector>
+#include "Symbol.h"
+#include "SymbolTable.h"
+#include "SymbolTable.cpp"
+using namespace std;
+extern FILE* yyin;
+extern int yyparse();
+//SymbolTable* root = new SymbolTable(); //Declaration OK?
+//std::vector<SymbolTable *> childrenVector; //Declaration OK?
+SymbolTable* root = NULL;
+
+/*
+void printVector(SymbolTable* root);
+
+int main(int argc, char *argv[]){
+	if(argc > 0)
+		yyin = fopen(argv[1], "r");
+	int status = yyparse();
+	if (status == 0)
+	{
+		printVector(root);
+	}
+	else
+	{
+		cout<<"Not Accepted"<<endl;
+	}
+	return 0;
+}
+
+void printVector(SymbolTable* root){
+
+	cout<<"Starting printVector func"<<endl;	
+	
+	cout<<"Symbol Table "<<root->getScope()<<endl;
+	
+	
+	
+	if (!root->declVector.empty()){
+		cout<<"Inside first if block"<<endl;
+		int sz;
+		sz = root->declVector.size();
+		for (int i=0; i<sz; i++){
+			string name;
+			string type;
+			string val;
+			name.assign(root->declVector[i]->var_name);
+			type.assign(root->declVector[i]->var_type);
+			cout<<"name: "<<name<<endl;
+			cout<<"type: "<<type<<endl;
+			//name = root->declVector[i]->var_name;	
+			//type = root->declVector[i]->var_type;	
+			if (type.compare("INT") == 0 || type.compare("FLOAT") == 0)  {
+				cout<<"name "<<name<<" type "<<type<<endl;		
+			}		
+			else if (type.compare("STRING") == 0) {
+				//val = root->declVector[i]->str_var_value;
+				val.assign(root->declVector[i]->str_var_value);
+				cout<<"name "<<name<<" type "<<type<<" value "<<val<<endl;	
+			}
+		}
+	
+	if (!root->childrenVector.empty()){
+		int childSize;
+		childSize = root->childrenVector.size();
+		for (int j=0; j<childSize; j++){
+			printVector(root->childrenVector[j]);
+		}			
+	}
+
+	}
+
+}
+*/
+
+int main(int argc, char *argv[]){
+	if(argc > 0)
+		yyin = fopen(argv[1], "r");
+	int status = yyparse();
+
+//	cout<<parse.tree<<endl;
+	if (status == 0)
+	{
+		cout<<"Henlo"<<endl;
+		if (root == NULL)
+		{
+			cout<<"Root is NULL"<<endl;
+		}
+		else
+		{
+			cout<<"Root points to: "<<root->getScope()<<endl;
+		}
+	}
+	else
+	{
+		cout<<"Not Accepted"<<endl;
+	}
+	return 0;
+}
+
+
+

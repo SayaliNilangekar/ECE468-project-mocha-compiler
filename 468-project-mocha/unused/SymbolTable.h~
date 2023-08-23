@@ -1,0 +1,32 @@
+//
+// Created by Lenovo on 9/29/2018.
+//
+
+#ifndef SYMBOLTABLE_H
+#define SYMBOLTABLE_H
+
+#include <iostream>
+#include <string>
+#include <stack>
+#include <vector>
+#include "Symbol.h"
+class SymbolTable : public Symbol{
+public:
+    SymbolTable();
+    void setScope(std::string scopeName); //setter for "scope" value
+    std::string getScope(); //getter for "scope"value
+    void setParent(SymbolTable* parentNode); //setter of "parent"
+    SymbolTable* getParent(); //returns ref to "parent" SymbolTable
+    void addDecl(Symbol* entry); //adds a declaration(of type Symbol) to vector
+    //NOT REQUIRED ???? >>>
+    //bool searchDecl(Symbol* entry); //searches for a particular declaration in vector
+    std::vector<Symbol *> declVector;
+    std::vector<SymbolTable *> childrenVector; //vector of all the popped SymbolTables
+    void addChildSymTable(SymbolTable* child); //adding most recently popped SymbolTable to "children" vector
+
+private:
+    std::string scope;
+    SymbolTable* parent;
+};
+
+#endif //ECE468STEP3_SYMBOLTABLE_H

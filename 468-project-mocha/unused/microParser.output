@@ -1,0 +1,1340 @@
+Nonterminals useless in grammar
+
+   var_decl
+   id_list
+   id_tail
+   read_stmt
+   write_stmt
+
+
+Terminals unused in grammar
+
+   READ
+   WRITE
+
+
+Rules useless in grammar
+
+   69 decl: var_decl decl
+
+   70 var_decl: var_type id_list SEMICOLON
+
+   71 id_list: id id_tail
+
+   72 id_tail: COMMA id id_tail
+
+   73 base_stmt: read_stmt
+   74          | write_stmt
+
+   75 read_stmt: READ OPENPARAN id_list CLOSEPARAN SEMICOLON
+
+   76 write_stmt: WRITE OPENPARAN id_list CLOSEPARAN SEMICOLON
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 $@1: %empty
+
+    2 $@2: %empty
+
+    3 program: PROGRAM $@1 id _BEGIN $@2 pgm_body END
+
+    4 id: IDENTIFIER
+
+    5 pgm_body: decl func_declarations
+
+    6 decl: string_decl decl
+    7     | %empty
+
+    8 string_decl: STRING id COLONEQUAL str SEMICOLON
+
+    9 str: STRINGLITERAL
+
+   10 var_type: FLOAT
+   11         | INT
+
+   12 any_type: var_type
+   13         | VOID
+
+   14 param_decl_list: param_decl param_decl_tail
+   15                | %empty
+
+   16 param_decl: var_type id
+
+   17 param_decl_tail: COMMA param_decl param_decl_tail
+   18                | %empty
+
+   19 func_declarations: func_decl func_declarations
+   20                  | %empty
+
+   21 func_decl: FUNCTION any_type id OPENPARAN param_decl_list CLOSEPARAN _BEGIN func_body END
+
+   22 func_body: decl stmt_list
+
+   23 stmt_list: stmt stmt_list
+   24          | %empty
+
+   25 stmt: base_stmt
+   26     | if_stmt
+   27     | loop_stmt
+
+   28 base_stmt: assign_stmt
+   29          | control_stmt
+
+   30 assign_stmt: assign_expr SEMICOLON
+
+   31 assign_expr: id COLONEQUAL expr
+
+   32 return_stmt: RETURN expr SEMICOLON
+
+   33 expr: expr_prefix factor
+
+   34 expr_prefix: expr_prefix factor addop
+   35            | %empty
+
+   36 factor: factor_prefix postfix_expr
+
+   37 factor_prefix: factor_prefix postfix_expr mulop
+   38              | %empty
+
+   39 postfix_expr: primary
+   40             | call_expr
+
+   41 call_expr: id OPENPARAN expr_list CLOSEPARAN
+
+   42 expr_list: expr expr_list_tail
+   43          | %empty
+
+   44 expr_list_tail: COMMA expr expr_list_tail
+   45               | %empty
+
+   46 primary: OPENPARAN expr CLOSEPARAN
+   47        | id
+   48        | INTLITERAL
+   49        | FLOATLITERAL
+
+   50 addop: PLUS
+   51      | MINUS
+
+   52 mulop: ASTERISK
+   53      | FWDSLASH
+
+   54 if_stmt: IF OPENPARAN cond CLOSEPARAN decl stmt_list else_part ENDIF
+
+   55 else_part: ELSE decl stmt_list
+   56          | %empty
+
+   57 cond: expr compop expr
+   58     | TRUE
+   59     | FALSE
+
+   60 compop: LESSTHAN
+   61       | GREATERTHAN
+   62       | EQUAL
+   63       | NOTEQUAL
+   64       | LESSTHANEQUAL
+   65       | GREATERTHANEQUAL
+
+   66 while_stmt: WHILE OPENPARAN cond CLOSEPARAN decl stmt_list ENDWHILE
+
+   67 control_stmt: return_stmt
+
+   68 loop_stmt: while_stmt
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+PROGRAM (258) 3
+INTLITERAL (259) 48
+FLOATLITERAL (260) 49
+STRINGLITERAL (261) 9
+IDENTIFIER (262) 4
+SEMICOLON (263) 8 30 32
+_BEGIN (264) 3 21
+END (265) 3 21
+FUNCTION (266) 21
+READ (267)
+WRITE (268)
+IF (269) 54
+ELSE (270) 55
+ENDIF (271) 54
+WHILE (272) 66
+ENDWHILE (273) 66
+RETURN (274) 32
+INT (275) 11
+VOID (276) 13
+STRING (277) 8
+FLOAT (278) 10
+TRUE (279) 58
+FALSE (280) 59
+COLONEQUAL (281) 8 31
+PLUS (282) 50
+MINUS (283) 51
+ASTERISK (284) 52
+FWDSLASH (285) 53
+EQUAL (286) 62
+NOTEQUAL (287) 63
+LESSTHAN (288) 60
+GREATERTHAN (289) 61
+OPENPARAN (290) 21 41 46 54 66
+CLOSEPARAN (291) 21 41 46 54 66
+COMMA (292) 17 44
+LESSTHANEQUAL (293) 64
+GREATERTHANEQUAL (294) 65
+
+
+Nonterminals, with rules where they appear
+
+$accept (40)
+    on left: 0
+program (41)
+    on left: 3, on right: 0
+$@1 (42)
+    on left: 1, on right: 3
+$@2 (43)
+    on left: 2, on right: 3
+id (44)
+    on left: 4, on right: 3 8 16 21 31 41 47
+pgm_body (45)
+    on left: 5, on right: 3
+decl (46)
+    on left: 6 7, on right: 5 6 22 54 55 66
+string_decl (47)
+    on left: 8, on right: 6
+str (48)
+    on left: 9, on right: 8
+var_type (49)
+    on left: 10 11, on right: 12 16
+any_type (50)
+    on left: 12 13, on right: 21
+param_decl_list (51)
+    on left: 14 15, on right: 21
+param_decl (52)
+    on left: 16, on right: 14 17
+param_decl_tail (53)
+    on left: 17 18, on right: 14 17
+func_declarations (54)
+    on left: 19 20, on right: 5 19
+func_decl (55)
+    on left: 21, on right: 19
+func_body (56)
+    on left: 22, on right: 21
+stmt_list (57)
+    on left: 23 24, on right: 22 23 54 55 66
+stmt (58)
+    on left: 25 26 27, on right: 23
+base_stmt (59)
+    on left: 28 29, on right: 25
+assign_stmt (60)
+    on left: 30, on right: 28
+assign_expr (61)
+    on left: 31, on right: 30
+return_stmt (62)
+    on left: 32, on right: 67
+expr (63)
+    on left: 33, on right: 31 32 42 44 46 57
+expr_prefix (64)
+    on left: 34 35, on right: 33 34
+factor (65)
+    on left: 36, on right: 33 34
+factor_prefix (66)
+    on left: 37 38, on right: 36 37
+postfix_expr (67)
+    on left: 39 40, on right: 36 37
+call_expr (68)
+    on left: 41, on right: 40
+expr_list (69)
+    on left: 42 43, on right: 41
+expr_list_tail (70)
+    on left: 44 45, on right: 42 44
+primary (71)
+    on left: 46 47 48 49, on right: 39
+addop (72)
+    on left: 50 51, on right: 34
+mulop (73)
+    on left: 52 53, on right: 37
+if_stmt (74)
+    on left: 54, on right: 26
+else_part (75)
+    on left: 55 56, on right: 54
+cond (76)
+    on left: 57 58 59, on right: 54 66
+compop (77)
+    on left: 60 61 62 63 64 65, on right: 57
+while_stmt (78)
+    on left: 66, on right: 68
+control_stmt (79)
+    on left: 67, on right: 29
+loop_stmt (80)
+    on left: 68, on right: 27
+
+
+State 0
+
+    0 $accept: . program $end
+
+    PROGRAM  shift, and go to state 1
+
+    program  go to state 2
+
+
+State 1
+
+    3 program: PROGRAM . $@1 id _BEGIN $@2 pgm_body END
+
+    $default  reduce using rule 1 ($@1)
+
+    $@1  go to state 3
+
+
+State 2
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    3 program: PROGRAM $@1 . id _BEGIN $@2 pgm_body END
+
+    IDENTIFIER  shift, and go to state 5
+
+    id  go to state 6
+
+
+State 4
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 5
+
+    4 id: IDENTIFIER .
+
+    $default  reduce using rule 4 (id)
+
+
+State 6
+
+    3 program: PROGRAM $@1 id . _BEGIN $@2 pgm_body END
+
+    _BEGIN  shift, and go to state 7
+
+
+State 7
+
+    3 program: PROGRAM $@1 id _BEGIN . $@2 pgm_body END
+
+    $default  reduce using rule 2 ($@2)
+
+    $@2  go to state 8
+
+
+State 8
+
+    3 program: PROGRAM $@1 id _BEGIN $@2 . pgm_body END
+
+    STRING  shift, and go to state 9
+
+    $default  reduce using rule 7 (decl)
+
+    pgm_body     go to state 10
+    decl         go to state 11
+    string_decl  go to state 12
+
+
+State 9
+
+    8 string_decl: STRING . id COLONEQUAL str SEMICOLON
+
+    IDENTIFIER  shift, and go to state 5
+
+    id  go to state 13
+
+
+State 10
+
+    3 program: PROGRAM $@1 id _BEGIN $@2 pgm_body . END
+
+    END  shift, and go to state 14
+
+
+State 11
+
+    5 pgm_body: decl . func_declarations
+
+    FUNCTION  shift, and go to state 15
+
+    $default  reduce using rule 20 (func_declarations)
+
+    func_declarations  go to state 16
+    func_decl          go to state 17
+
+
+State 12
+
+    6 decl: string_decl . decl
+
+    STRING  shift, and go to state 9
+
+    $default  reduce using rule 7 (decl)
+
+    decl         go to state 18
+    string_decl  go to state 12
+
+
+State 13
+
+    8 string_decl: STRING id . COLONEQUAL str SEMICOLON
+
+    COLONEQUAL  shift, and go to state 19
+
+
+State 14
+
+    3 program: PROGRAM $@1 id _BEGIN $@2 pgm_body END .
+
+    $default  reduce using rule 3 (program)
+
+
+State 15
+
+   21 func_decl: FUNCTION . any_type id OPENPARAN param_decl_list CLOSEPARAN _BEGIN func_body END
+
+    INT    shift, and go to state 20
+    VOID   shift, and go to state 21
+    FLOAT  shift, and go to state 22
+
+    var_type  go to state 23
+    any_type  go to state 24
+
+
+State 16
+
+    5 pgm_body: decl func_declarations .
+
+    $default  reduce using rule 5 (pgm_body)
+
+
+State 17
+
+   19 func_declarations: func_decl . func_declarations
+
+    FUNCTION  shift, and go to state 15
+
+    $default  reduce using rule 20 (func_declarations)
+
+    func_declarations  go to state 25
+    func_decl          go to state 17
+
+
+State 18
+
+    6 decl: string_decl decl .
+
+    $default  reduce using rule 6 (decl)
+
+
+State 19
+
+    8 string_decl: STRING id COLONEQUAL . str SEMICOLON
+
+    STRINGLITERAL  shift, and go to state 26
+
+    str  go to state 27
+
+
+State 20
+
+   11 var_type: INT .
+
+    $default  reduce using rule 11 (var_type)
+
+
+State 21
+
+   13 any_type: VOID .
+
+    $default  reduce using rule 13 (any_type)
+
+
+State 22
+
+   10 var_type: FLOAT .
+
+    $default  reduce using rule 10 (var_type)
+
+
+State 23
+
+   12 any_type: var_type .
+
+    $default  reduce using rule 12 (any_type)
+
+
+State 24
+
+   21 func_decl: FUNCTION any_type . id OPENPARAN param_decl_list CLOSEPARAN _BEGIN func_body END
+
+    IDENTIFIER  shift, and go to state 5
+
+    id  go to state 28
+
+
+State 25
+
+   19 func_declarations: func_decl func_declarations .
+
+    $default  reduce using rule 19 (func_declarations)
+
+
+State 26
+
+    9 str: STRINGLITERAL .
+
+    $default  reduce using rule 9 (str)
+
+
+State 27
+
+    8 string_decl: STRING id COLONEQUAL str . SEMICOLON
+
+    SEMICOLON  shift, and go to state 29
+
+
+State 28
+
+   21 func_decl: FUNCTION any_type id . OPENPARAN param_decl_list CLOSEPARAN _BEGIN func_body END
+
+    OPENPARAN  shift, and go to state 30
+
+
+State 29
+
+    8 string_decl: STRING id COLONEQUAL str SEMICOLON .
+
+    $default  reduce using rule 8 (string_decl)
+
+
+State 30
+
+   21 func_decl: FUNCTION any_type id OPENPARAN . param_decl_list CLOSEPARAN _BEGIN func_body END
+
+    INT    shift, and go to state 20
+    FLOAT  shift, and go to state 22
+
+    $default  reduce using rule 15 (param_decl_list)
+
+    var_type         go to state 31
+    param_decl_list  go to state 32
+    param_decl       go to state 33
+
+
+State 31
+
+   16 param_decl: var_type . id
+
+    IDENTIFIER  shift, and go to state 5
+
+    id  go to state 34
+
+
+State 32
+
+   21 func_decl: FUNCTION any_type id OPENPARAN param_decl_list . CLOSEPARAN _BEGIN func_body END
+
+    CLOSEPARAN  shift, and go to state 35
+
+
+State 33
+
+   14 param_decl_list: param_decl . param_decl_tail
+
+    COMMA  shift, and go to state 36
+
+    $default  reduce using rule 18 (param_decl_tail)
+
+    param_decl_tail  go to state 37
+
+
+State 34
+
+   16 param_decl: var_type id .
+
+    $default  reduce using rule 16 (param_decl)
+
+
+State 35
+
+   21 func_decl: FUNCTION any_type id OPENPARAN param_decl_list CLOSEPARAN . _BEGIN func_body END
+
+    _BEGIN  shift, and go to state 38
+
+
+State 36
+
+   17 param_decl_tail: COMMA . param_decl param_decl_tail
+
+    INT    shift, and go to state 20
+    FLOAT  shift, and go to state 22
+
+    var_type    go to state 31
+    param_decl  go to state 39
+
+
+State 37
+
+   14 param_decl_list: param_decl param_decl_tail .
+
+    $default  reduce using rule 14 (param_decl_list)
+
+
+State 38
+
+   21 func_decl: FUNCTION any_type id OPENPARAN param_decl_list CLOSEPARAN _BEGIN . func_body END
+
+    STRING  shift, and go to state 9
+
+    $default  reduce using rule 7 (decl)
+
+    decl         go to state 40
+    string_decl  go to state 12
+    func_body    go to state 41
+
+
+State 39
+
+   17 param_decl_tail: COMMA param_decl . param_decl_tail
+
+    COMMA  shift, and go to state 36
+
+    $default  reduce using rule 18 (param_decl_tail)
+
+    param_decl_tail  go to state 42
+
+
+State 40
+
+   22 func_body: decl . stmt_list
+
+    IDENTIFIER  shift, and go to state 5
+    IF          shift, and go to state 43
+    WHILE       shift, and go to state 44
+    RETURN      shift, and go to state 45
+
+    $default  reduce using rule 24 (stmt_list)
+
+    id            go to state 46
+    stmt_list     go to state 47
+    stmt          go to state 48
+    base_stmt     go to state 49
+    assign_stmt   go to state 50
+    assign_expr   go to state 51
+    return_stmt   go to state 52
+    if_stmt       go to state 53
+    while_stmt    go to state 54
+    control_stmt  go to state 55
+    loop_stmt     go to state 56
+
+
+State 41
+
+   21 func_decl: FUNCTION any_type id OPENPARAN param_decl_list CLOSEPARAN _BEGIN func_body . END
+
+    END  shift, and go to state 57
+
+
+State 42
+
+   17 param_decl_tail: COMMA param_decl param_decl_tail .
+
+    $default  reduce using rule 17 (param_decl_tail)
+
+
+State 43
+
+   54 if_stmt: IF . OPENPARAN cond CLOSEPARAN decl stmt_list else_part ENDIF
+
+    OPENPARAN  shift, and go to state 58
+
+
+State 44
+
+   66 while_stmt: WHILE . OPENPARAN cond CLOSEPARAN decl stmt_list ENDWHILE
+
+    OPENPARAN  shift, and go to state 59
+
+
+State 45
+
+   32 return_stmt: RETURN . expr SEMICOLON
+
+    $default  reduce using rule 35 (expr_prefix)
+
+    expr         go to state 60
+    expr_prefix  go to state 61
+
+
+State 46
+
+   31 assign_expr: id . COLONEQUAL expr
+
+    COLONEQUAL  shift, and go to state 62
+
+
+State 47
+
+   22 func_body: decl stmt_list .
+
+    $default  reduce using rule 22 (func_body)
+
+
+State 48
+
+   23 stmt_list: stmt . stmt_list
+
+    IDENTIFIER  shift, and go to state 5
+    IF          shift, and go to state 43
+    WHILE       shift, and go to state 44
+    RETURN      shift, and go to state 45
+
+    $default  reduce using rule 24 (stmt_list)
+
+    id            go to state 46
+    stmt_list     go to state 63
+    stmt          go to state 48
+    base_stmt     go to state 49
+    assign_stmt   go to state 50
+    assign_expr   go to state 51
+    return_stmt   go to state 52
+    if_stmt       go to state 53
+    while_stmt    go to state 54
+    control_stmt  go to state 55
+    loop_stmt     go to state 56
+
+
+State 49
+
+   25 stmt: base_stmt .
+
+    $default  reduce using rule 25 (stmt)
+
+
+State 50
+
+   28 base_stmt: assign_stmt .
+
+    $default  reduce using rule 28 (base_stmt)
+
+
+State 51
+
+   30 assign_stmt: assign_expr . SEMICOLON
+
+    SEMICOLON  shift, and go to state 64
+
+
+State 52
+
+   67 control_stmt: return_stmt .
+
+    $default  reduce using rule 67 (control_stmt)
+
+
+State 53
+
+   26 stmt: if_stmt .
+
+    $default  reduce using rule 26 (stmt)
+
+
+State 54
+
+   68 loop_stmt: while_stmt .
+
+    $default  reduce using rule 68 (loop_stmt)
+
+
+State 55
+
+   29 base_stmt: control_stmt .
+
+    $default  reduce using rule 29 (base_stmt)
+
+
+State 56
+
+   27 stmt: loop_stmt .
+
+    $default  reduce using rule 27 (stmt)
+
+
+State 57
+
+   21 func_decl: FUNCTION any_type id OPENPARAN param_decl_list CLOSEPARAN _BEGIN func_body END .
+
+    $default  reduce using rule 21 (func_decl)
+
+
+State 58
+
+   54 if_stmt: IF OPENPARAN . cond CLOSEPARAN decl stmt_list else_part ENDIF
+
+    TRUE   shift, and go to state 65
+    FALSE  shift, and go to state 66
+
+    $default  reduce using rule 35 (expr_prefix)
+
+    expr         go to state 67
+    expr_prefix  go to state 61
+    cond         go to state 68
+
+
+State 59
+
+   66 while_stmt: WHILE OPENPARAN . cond CLOSEPARAN decl stmt_list ENDWHILE
+
+    TRUE   shift, and go to state 65
+    FALSE  shift, and go to state 66
+
+    $default  reduce using rule 35 (expr_prefix)
+
+    expr         go to state 67
+    expr_prefix  go to state 61
+    cond         go to state 69
+
+
+State 60
+
+   32 return_stmt: RETURN expr . SEMICOLON
+
+    SEMICOLON  shift, and go to state 70
+
+
+State 61
+
+   33 expr: expr_prefix . factor
+   34 expr_prefix: expr_prefix . factor addop
+
+    $default  reduce using rule 38 (factor_prefix)
+
+    factor         go to state 71
+    factor_prefix  go to state 72
+
+
+State 62
+
+   31 assign_expr: id COLONEQUAL . expr
+
+    $default  reduce using rule 35 (expr_prefix)
+
+    expr         go to state 73
+    expr_prefix  go to state 61
+
+
+State 63
+
+   23 stmt_list: stmt stmt_list .
+
+    $default  reduce using rule 23 (stmt_list)
+
+
+State 64
+
+   30 assign_stmt: assign_expr SEMICOLON .
+
+    $default  reduce using rule 30 (assign_stmt)
+
+
+State 65
+
+   58 cond: TRUE .
+
+    $default  reduce using rule 58 (cond)
+
+
+State 66
+
+   59 cond: FALSE .
+
+    $default  reduce using rule 59 (cond)
+
+
+State 67
+
+   57 cond: expr . compop expr
+
+    EQUAL             shift, and go to state 74
+    NOTEQUAL          shift, and go to state 75
+    LESSTHAN          shift, and go to state 76
+    GREATERTHAN       shift, and go to state 77
+    LESSTHANEQUAL     shift, and go to state 78
+    GREATERTHANEQUAL  shift, and go to state 79
+
+    compop  go to state 80
+
+
+State 68
+
+   54 if_stmt: IF OPENPARAN cond . CLOSEPARAN decl stmt_list else_part ENDIF
+
+    CLOSEPARAN  shift, and go to state 81
+
+
+State 69
+
+   66 while_stmt: WHILE OPENPARAN cond . CLOSEPARAN decl stmt_list ENDWHILE
+
+    CLOSEPARAN  shift, and go to state 82
+
+
+State 70
+
+   32 return_stmt: RETURN expr SEMICOLON .
+
+    $default  reduce using rule 32 (return_stmt)
+
+
+State 71
+
+   33 expr: expr_prefix factor .
+   34 expr_prefix: expr_prefix factor . addop
+
+    PLUS   shift, and go to state 83
+    MINUS  shift, and go to state 84
+
+    $default  reduce using rule 33 (expr)
+
+    addop  go to state 85
+
+
+State 72
+
+   36 factor: factor_prefix . postfix_expr
+   37 factor_prefix: factor_prefix . postfix_expr mulop
+
+    INTLITERAL    shift, and go to state 86
+    FLOATLITERAL  shift, and go to state 87
+    IDENTIFIER    shift, and go to state 5
+    OPENPARAN     shift, and go to state 88
+
+    id            go to state 89
+    postfix_expr  go to state 90
+    call_expr     go to state 91
+    primary       go to state 92
+
+
+State 73
+
+   31 assign_expr: id COLONEQUAL expr .
+
+    $default  reduce using rule 31 (assign_expr)
+
+
+State 74
+
+   62 compop: EQUAL .
+
+    $default  reduce using rule 62 (compop)
+
+
+State 75
+
+   63 compop: NOTEQUAL .
+
+    $default  reduce using rule 63 (compop)
+
+
+State 76
+
+   60 compop: LESSTHAN .
+
+    $default  reduce using rule 60 (compop)
+
+
+State 77
+
+   61 compop: GREATERTHAN .
+
+    $default  reduce using rule 61 (compop)
+
+
+State 78
+
+   64 compop: LESSTHANEQUAL .
+
+    $default  reduce using rule 64 (compop)
+
+
+State 79
+
+   65 compop: GREATERTHANEQUAL .
+
+    $default  reduce using rule 65 (compop)
+
+
+State 80
+
+   57 cond: expr compop . expr
+
+    $default  reduce using rule 35 (expr_prefix)
+
+    expr         go to state 93
+    expr_prefix  go to state 61
+
+
+State 81
+
+   54 if_stmt: IF OPENPARAN cond CLOSEPARAN . decl stmt_list else_part ENDIF
+
+    STRING  shift, and go to state 9
+
+    $default  reduce using rule 7 (decl)
+
+    decl         go to state 94
+    string_decl  go to state 12
+
+
+State 82
+
+   66 while_stmt: WHILE OPENPARAN cond CLOSEPARAN . decl stmt_list ENDWHILE
+
+    STRING  shift, and go to state 9
+
+    $default  reduce using rule 7 (decl)
+
+    decl         go to state 95
+    string_decl  go to state 12
+
+
+State 83
+
+   50 addop: PLUS .
+
+    $default  reduce using rule 50 (addop)
+
+
+State 84
+
+   51 addop: MINUS .
+
+    $default  reduce using rule 51 (addop)
+
+
+State 85
+
+   34 expr_prefix: expr_prefix factor addop .
+
+    $default  reduce using rule 34 (expr_prefix)
+
+
+State 86
+
+   48 primary: INTLITERAL .
+
+    $default  reduce using rule 48 (primary)
+
+
+State 87
+
+   49 primary: FLOATLITERAL .
+
+    $default  reduce using rule 49 (primary)
+
+
+State 88
+
+   46 primary: OPENPARAN . expr CLOSEPARAN
+
+    $default  reduce using rule 35 (expr_prefix)
+
+    expr         go to state 96
+    expr_prefix  go to state 61
+
+
+State 89
+
+   41 call_expr: id . OPENPARAN expr_list CLOSEPARAN
+   47 primary: id .
+
+    OPENPARAN  shift, and go to state 97
+
+    $default  reduce using rule 47 (primary)
+
+
+State 90
+
+   36 factor: factor_prefix postfix_expr .
+   37 factor_prefix: factor_prefix postfix_expr . mulop
+
+    ASTERISK  shift, and go to state 98
+    FWDSLASH  shift, and go to state 99
+
+    $default  reduce using rule 36 (factor)
+
+    mulop  go to state 100
+
+
+State 91
+
+   40 postfix_expr: call_expr .
+
+    $default  reduce using rule 40 (postfix_expr)
+
+
+State 92
+
+   39 postfix_expr: primary .
+
+    $default  reduce using rule 39 (postfix_expr)
+
+
+State 93
+
+   57 cond: expr compop expr .
+
+    $default  reduce using rule 57 (cond)
+
+
+State 94
+
+   54 if_stmt: IF OPENPARAN cond CLOSEPARAN decl . stmt_list else_part ENDIF
+
+    IDENTIFIER  shift, and go to state 5
+    IF          shift, and go to state 43
+    WHILE       shift, and go to state 44
+    RETURN      shift, and go to state 45
+
+    $default  reduce using rule 24 (stmt_list)
+
+    id            go to state 46
+    stmt_list     go to state 101
+    stmt          go to state 48
+    base_stmt     go to state 49
+    assign_stmt   go to state 50
+    assign_expr   go to state 51
+    return_stmt   go to state 52
+    if_stmt       go to state 53
+    while_stmt    go to state 54
+    control_stmt  go to state 55
+    loop_stmt     go to state 56
+
+
+State 95
+
+   66 while_stmt: WHILE OPENPARAN cond CLOSEPARAN decl . stmt_list ENDWHILE
+
+    IDENTIFIER  shift, and go to state 5
+    IF          shift, and go to state 43
+    WHILE       shift, and go to state 44
+    RETURN      shift, and go to state 45
+
+    $default  reduce using rule 24 (stmt_list)
+
+    id            go to state 46
+    stmt_list     go to state 102
+    stmt          go to state 48
+    base_stmt     go to state 49
+    assign_stmt   go to state 50
+    assign_expr   go to state 51
+    return_stmt   go to state 52
+    if_stmt       go to state 53
+    while_stmt    go to state 54
+    control_stmt  go to state 55
+    loop_stmt     go to state 56
+
+
+State 96
+
+   46 primary: OPENPARAN expr . CLOSEPARAN
+
+    CLOSEPARAN  shift, and go to state 103
+
+
+State 97
+
+   41 call_expr: id OPENPARAN . expr_list CLOSEPARAN
+
+    CLOSEPARAN  reduce using rule 43 (expr_list)
+    $default    reduce using rule 35 (expr_prefix)
+
+    expr         go to state 104
+    expr_prefix  go to state 61
+    expr_list    go to state 105
+
+
+State 98
+
+   52 mulop: ASTERISK .
+
+    $default  reduce using rule 52 (mulop)
+
+
+State 99
+
+   53 mulop: FWDSLASH .
+
+    $default  reduce using rule 53 (mulop)
+
+
+State 100
+
+   37 factor_prefix: factor_prefix postfix_expr mulop .
+
+    $default  reduce using rule 37 (factor_prefix)
+
+
+State 101
+
+   54 if_stmt: IF OPENPARAN cond CLOSEPARAN decl stmt_list . else_part ENDIF
+
+    ELSE  shift, and go to state 106
+
+    $default  reduce using rule 56 (else_part)
+
+    else_part  go to state 107
+
+
+State 102
+
+   66 while_stmt: WHILE OPENPARAN cond CLOSEPARAN decl stmt_list . ENDWHILE
+
+    ENDWHILE  shift, and go to state 108
+
+
+State 103
+
+   46 primary: OPENPARAN expr CLOSEPARAN .
+
+    $default  reduce using rule 46 (primary)
+
+
+State 104
+
+   42 expr_list: expr . expr_list_tail
+
+    COMMA  shift, and go to state 109
+
+    $default  reduce using rule 45 (expr_list_tail)
+
+    expr_list_tail  go to state 110
+
+
+State 105
+
+   41 call_expr: id OPENPARAN expr_list . CLOSEPARAN
+
+    CLOSEPARAN  shift, and go to state 111
+
+
+State 106
+
+   55 else_part: ELSE . decl stmt_list
+
+    STRING  shift, and go to state 9
+
+    $default  reduce using rule 7 (decl)
+
+    decl         go to state 112
+    string_decl  go to state 12
+
+
+State 107
+
+   54 if_stmt: IF OPENPARAN cond CLOSEPARAN decl stmt_list else_part . ENDIF
+
+    ENDIF  shift, and go to state 113
+
+
+State 108
+
+   66 while_stmt: WHILE OPENPARAN cond CLOSEPARAN decl stmt_list ENDWHILE .
+
+    $default  reduce using rule 66 (while_stmt)
+
+
+State 109
+
+   44 expr_list_tail: COMMA . expr expr_list_tail
+
+    $default  reduce using rule 35 (expr_prefix)
+
+    expr         go to state 114
+    expr_prefix  go to state 61
+
+
+State 110
+
+   42 expr_list: expr expr_list_tail .
+
+    $default  reduce using rule 42 (expr_list)
+
+
+State 111
+
+   41 call_expr: id OPENPARAN expr_list CLOSEPARAN .
+
+    $default  reduce using rule 41 (call_expr)
+
+
+State 112
+
+   55 else_part: ELSE decl . stmt_list
+
+    IDENTIFIER  shift, and go to state 5
+    IF          shift, and go to state 43
+    WHILE       shift, and go to state 44
+    RETURN      shift, and go to state 45
+
+    $default  reduce using rule 24 (stmt_list)
+
+    id            go to state 46
+    stmt_list     go to state 115
+    stmt          go to state 48
+    base_stmt     go to state 49
+    assign_stmt   go to state 50
+    assign_expr   go to state 51
+    return_stmt   go to state 52
+    if_stmt       go to state 53
+    while_stmt    go to state 54
+    control_stmt  go to state 55
+    loop_stmt     go to state 56
+
+
+State 113
+
+   54 if_stmt: IF OPENPARAN cond CLOSEPARAN decl stmt_list else_part ENDIF .
+
+    $default  reduce using rule 54 (if_stmt)
+
+
+State 114
+
+   44 expr_list_tail: COMMA expr . expr_list_tail
+
+    COMMA  shift, and go to state 109
+
+    $default  reduce using rule 45 (expr_list_tail)
+
+    expr_list_tail  go to state 116
+
+
+State 115
+
+   55 else_part: ELSE decl stmt_list .
+
+    $default  reduce using rule 55 (else_part)
+
+
+State 116
+
+   44 expr_list_tail: COMMA expr expr_list_tail .
+
+    $default  reduce using rule 44 (expr_list_tail)

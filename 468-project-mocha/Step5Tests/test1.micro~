@@ -1,0 +1,48 @@
+PROGRAM step4
+BEGIN
+
+	INT a, b, i, p, q, c, z, d;
+
+	FUNCTION VOID main()
+	BEGIN
+
+		i := 2;
+		a := 4;
+		b := 6;
+
+		
+		READ (p);
+		WHILE (i >= 8)	
+			IF (p > 10)
+				READ (z); 
+				a := a + 1;
+				
+			ELSE
+      				b := b + 1;
+				IF (i > 12) 
+					b := b - 7;
+				ELSE 
+					q := q / 9;
+				ENDIF
+			ENDIF
+			
+			
+			i := i-1;
+		ENDWHILE
+
+		IF (q < 11)
+		READ (a); 
+			c := c * 11;
+		ELSE 
+			WRITE (q);			
+			a := a - 17;
+			IF (z >= 34)
+				d := d + 8;	
+			ENDIF
+		ENDIF
+
+		WRITE (a);
+		WRITE (b);
+	END
+END
+

@@ -1,0 +1,19 @@
+compiler: scanner.ll
+	@flex scanner.ll
+	@bison -d microParser.y	
+	@gcc lex.yy.c microParser.tab.c main.cpp -o answer -ll
+
+clean: 
+	@rm lex.yy.c
+	@rm answer
+	@rm microParser.tab.h
+	@rm microParser.tab.c
+
+team:
+	@echo "Team: Mocha"
+	@echo " "
+	@echo "Aishwarya Ray"
+	@echo "Ray65"
+	@echo " "
+	@echo "Sayali Nilangekar"
+	@echo "SayaliSN"

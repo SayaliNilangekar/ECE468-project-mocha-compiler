@@ -1,0 +1,32 @@
+//
+// Created by Lenovo on 9/29/2018.
+//
+#include<iostream>
+#include <string>
+#include <stack>
+#include <vector>
+#include "SymbolTable.h"
+
+void SymbolTable::setScope(std::string scopeName) {
+    scope.assign(scopeName);
+}
+string SymbolTable::getScope() {
+    return scope;
+}
+
+void SymbolTable::setParent(SymbolTable *parentNode) {
+    parent = parentNode;
+}
+
+SymbolTable* SymbolTable::getParent() {
+    return parent;
+}
+
+void SymbolTable::addDecl(Symbol *entry) {
+    declVector.insert(declVector.begin(), entry)
+}
+
+
+void SymbolTable::addChildSymTable(SymbolTable* child) {
+    childrenVector.push_back(child);
+}

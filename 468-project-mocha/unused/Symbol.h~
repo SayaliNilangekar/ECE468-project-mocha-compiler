@@ -1,0 +1,53 @@
+//
+// Created by Lenovo on 9/29/2018.
+//
+
+#ifndef SYMBOL_H
+#define SYMBOL_H
+
+#include <iostream>
+#include <string>
+#include <stack>
+#include <vector>
+using namespace std;
+
+class Symbol{
+public:
+    string var_name;
+    string var_type;
+    string* str_var_value;
+    int int_var_value;
+    float float_var_value;
+    string getStrValue(string* s)
+	{
+		return *s;
+	}
+/*
+    Symbol(string* val)
+    {
+        //string::strcpy(str_var_value, val);
+        //str_var_value = val;
+	int_var_value = 0;
+	float_var_value = 0.0;
+        str_var_value.assign(*val);
+
+	var_type.assign("STRING");
+    }
+    Symbol(int val){
+	int_var_value = val;
+        float_var_value = 0.0;
+	str_var_value.assign("");
+
+	var_type.assign("INT");
+    }
+    Symbol(float val){
+        int_var_value = 0;
+	float_var_value = val;
+	str_var_value.assign("");
+
+	var_type.assign("FLOAT");
+    }
+*/
+};
+
+#endif //ECE468STEP3_SYMBOL_H
